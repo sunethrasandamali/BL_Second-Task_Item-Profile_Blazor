@@ -1,0 +1,144 @@
+﻿@typeparam TItem
+@using Telerik.Blazor
+@using Telerik.DataSource
+
+@if (DataObject !=null)
+{
+    <TelerikGrid  @ref="@GridRef"
+             Data=@DataObject 
+             Pageable="true"
+             Sortable="true"
+             FilterMode="@GridFilterMode.FilterRow"
+             Resizable="true"
+             SelectionMode="GridSelectionMode.Multiple"
+             PageSize="10"
+             Navigable="true"
+             FilterRowDebounceDelay="filterDebounceDelay">
+    <GridColumns>
+        <GridCheckboxColumn></GridCheckboxColumn>
+        @foreach (var row in FormObject.Children)
+        {
+            @if (row.ElementType != null && row.ElementType.Equals("GridParameter"))
+			{
+                @if (row.Children.Count() > 0)
+                {
+                    @foreach (var child in row.Children)
+                    {
+                     <GridColumn Title="@row.ElementCaption"
+                                Width="200px"
+                                TextAlign="@ColumnTextAlign.Center">
+                         <Template>
+                            @{
+                               @if (child.ElementType != null && child.ElementType.Equals("TelCmb"))
+                               {
+                                    if (child.ElementID != null && child.ElementID.Equals("CodeBase"))
+                                    {
+                                        <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelCodeBaseCombo UIElement="child" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                                    }
+                                    if (child.ElementID != null && child.ElementID.Equals("Address"))
+                                    {
+                                        <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelAddressCombo UIElement="child" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                                    }
+
+                                    if (child.ElementID != null && child.ElementID.Equals("Item"))
+                                    {
+                                       <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelItemCombo UIElement="child" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                                    }
+
+                                    if (child.ElementID != null && child.ElementID.Equals("Unit"))
+                                    {
+                                        <BLUnitCombo UIElement="child" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                                    }
+
+                                    if (child.ElementID != null && child.ElementID.Equals("Account"))
+                                    {
+                                        <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelAccountCombo UIElement="child" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+
+                                    }
+
+                                }
+                                   @if (child.ElementType != null && child.ElementType.Equals("TelNumericBox"))
+                                {
+
+                                    <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelNumericBox UIElement="child" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                                }
+
+                                @if (child.ElementType != null && child.ElementType.Equals("ReadOnlyNB"))
+                                {
+
+                                    <BLNumericBox UIElement="child" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" IsReadOnly=true />
+                                }
+
+                                @if (child.ElementType != null && child.ElementType.Equals("TextBox"))
+                                {
+
+                                    <BLTextBox UIElement="child" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers"></BLTextBox>
+                                }
+
+                                 @if (child.ElementType != null && child.ElementType.Equals("TelSwitch"))
+                                {
+                                    <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelSwitch FromSection="child" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers">
+
+                                    </BL10.Com.Client.Shared.Components.TelerikComponents.BLTelSwitch>
+                                }
+
+
+                                @if (child.ElementType != null && child.ElementType.Equals("MultiRadio"))
+                                {
+
+                                    <BLMultiRadio UIElement="child" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers"></BLMultiRadio>
+                                }
+
+                                @if (child.ElementType != null && child.ElementType.Equals("CheckBox"))
+                                {
+
+                                    <BLCheckBox UIElement="child" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers"></BLCheckBox>
+                                }
+
+                                @if (child.ElementType != null && child.ElementType.Equals("Button"))
+                                {
+                                    <BLButton DataObject="DataObject" InteractionLogics="InteractionLogics" FromSection="child" ObjectHelpers="ObjectHelpers" />
+                                }
+
+                                @if (child.ElementType != null && child.ElementType.Equals("TelDatePicker"))
+                                {
+                                    <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelDatePicker DataObject="DataObject" InteractionLogics="InteractionLogics" UIElement="child" ObjectHelpers="ObjectHelpers" />
+                                }
+
+                                 @if (child.ElementType != null && child.ElementType.Equals("TelDTimePicker"))
+                                {
+                                    <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelDateTimePicker DataObject="DataObject" InteractionLogics="InteractionLogics" UIElement="child" ObjectHelpers="ObjectHelpers" />
+                                }
+                                                
+                              }
+                        </Template>
+                    </GridColumn>
+                    
+                    }
+                }
+                else
+                {
+                    <GridColumn Field="@row.DefaultAccessPath"
+                                Title="@row.ElementCaption"
+                                TextAlign="@ColumnTextAlign.Center"
+                                ShowFilterCellButtons="true">
+
+                    </GridColumn>
+                }
+
+			}
+        }
+        
+       
+    </GridColumns>
+    @*<GridToolBar>
+        <GridCommandButton Command="Add" Icon="add">Add Product</GridCommandButton>
+    </GridToolBar>*@
+
+
+</TelerikGrid>
+}
+else
+{
+    
+}

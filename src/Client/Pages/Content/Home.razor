@@ -1,0 +1,93 @@
+﻿@page "/home"
+@page "/"
+@using BlueLotus360.CleanArchitecture.Domain.Entities
+@using System.Security.Claims
+@using BlueLotus360.Com.Shared.Constants.Storage
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Home> _localizer
+
+<MudContainer >
+    <MudText Typo="Typo.h6">Home</MudText>
+    <MudDivider Class="my-2"/>
+
+    @if (tiles!=null && tiles.Count()>0)
+    {
+        
+    
+    <MudPaper Elevation="1" Class="dash-board-container pa-6"> 
+        
+        <MudGrid Class="">
+
+            @foreach (var s in tiles)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                        <MudCard Class="pa-4" Style="border:1px; solid black;"  >
+                                <MudCardHeader>
+                                    <CardHeaderAvatar>
+                                        <MudIcon Icon="@Icons.TwoTone.BarChart" Size="Size.Small"></MudIcon>
+                                    </CardHeaderAvatar>
+                                    <CardHeaderContent >
+                                        <MudText  Typo="Typo.body1" Style="font-size:1em;">@s.MenuCaption</MudText>
+                                        
+                                    </CardHeaderContent>
+                                    <CardHeaderActions>
+                                        <MudIconButton Icon="@Icons.TwoTone.ChevronRight" Color="Color.Default" OnClick="@(()=>_navigationManager.NavigateTo(s.GetPathURL()))"/>
+                                    </CardHeaderActions>
+                                </MudCardHeader>
+                                
+                                <MudCardContent Class="mx-3">
+                                    <MudText  Typo="Typo.body2"></MudText>
+                                </MudCardContent>
+                               @* <MudCardActions>
+                                    <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
+                                    <MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
+                                </MudCardActions>*@
+                        </MudCard>
+                </MudItem>
+            }
+            
+
+
+        </MudGrid>
+    </MudPaper>
+    }
+</MudContainer>
+
+
+@code{
+    private MenuItem menuItem = new();
+    List<MenuItem> tiles = new List<MenuItem>();
+
+    protected  override async Task OnInitializedAsync()
+    {
+        //var state = await _stateProvider.GetAuthenticationStateAsync();
+        if (!string.IsNullOrEmpty(await _localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken)))
+        {
+            menuItem=await  _navManger.GetNavigationMenu();
+                if (menuItem!=null && menuItem.SubMenus.Count()>0)
+                {
+                    SetTiles(menuItem.SubMenus.Where(x=>x.Menuname=="MIS").ToList());
+                }
+                
+            }
+        
+
+    }
+    private void SetTiles(IList<MenuItem> tile_list)
+    {
+        foreach(var menu in tile_list)
+        {
+            if (menu.SubMenus.Count() == 0)
+            {
+                tiles.Add(menu);
+
+            }
+            else
+            {
+                SetTiles(menu.SubMenus);
+            }
+        }
+    }
+
+
+}
+

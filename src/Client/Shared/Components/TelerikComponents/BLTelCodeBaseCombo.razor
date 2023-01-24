@@ -1,0 +1,42 @@
+﻿@using BlueLotus360.CleanArchitecture.Domain.DTO.Object;
+
+@using BlueLotus360.CleanArchitecture.Domain.Entities;
+
+<MudItem xs="12" class=@css_class md="@UIElement.Width">
+    @if (CodeBaseResponses == null)
+    {
+        <MudSkeleton Animation="Animation.Wave" Width="100%" />
+    }
+    else
+    {
+
+
+
+        <div class="w-100">
+            <div class="col-12">
+                <div class="bk-k-lable">@UIElement.ElementCaption</div>
+            </div>
+            <div class="col-12">
+
+
+                <TelerikComboBox Data="@CodeBaseResponses" TextField="CodeName" ValueField="CodeKey"
+                             TValue="int" TItem="CodeBaseResponse"
+                             ValueChanged="(int  s)=>OnComboValueChangedTel(s)"
+                             Value="selectedCodeBase.CodeKey"
+                             FilterOperator="Telerik.Blazor.StringFilterOperator.Contains">
+                </TelerikComboBox>
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+    }
+</MudItem>
+
+
+

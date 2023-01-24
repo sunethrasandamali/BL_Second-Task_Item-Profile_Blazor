@@ -1,0 +1,32 @@
+﻿@page "/companySelection"
+@using BlueLotus360.CleanArchitecture.Shared.Models
+@attribute [Authorize]
+<div class="company-selection-container">
+        <div class="company-box  p-4">
+    <EditForm Model="_companySelectionModal">
+        <MudGrid>
+
+            <MudItem xs="12">
+                <div class="d-flex justify-center">
+                    <MudText Typo="Typo.h5">Select a Company</MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="12" md="12">
+                <MudAutocomplete T="CompanyResponse" HelperText=""    SearchFunc="@SearchAsync"
+                           OffsetY="true" AdornmentColor="Color.Dark" ValueChanged="CompanyChange" Value="@selectedCompany" Disabled="@(list.Count==0)">
+
+                 
+
+                </MudAutocomplete>
+            </MudItem>
+
+
+            <MudItem xs="12" Class="d-flex justify-center">
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" OnClick="ProcessCompanySelection"  Size="Size.Medium"  Class="bl-btn-primary flex-grow-1">Continue...</MudButton>
+            </MudItem>
+
+        </MudGrid>
+    </EditForm>
+        </div>
+    </div>
+ 

@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <RootNamespace>BlueLotus360.Com.UI.Definitions</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\SetUp\Master Data\Item Profile Simple V2\Components\BLItemProfileSimpleUpdateDetails.razor.cs~RFd84d6ea.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazor-ApexCharts" Version="0.9.12-beta" />
+    <PackageReference Include="BlazorBarcodeScanner.ZXing.JS" Version="0.2.8" />
+    <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+    <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
+    <PackageReference Include="BrowserInterop" Version="1.1.2" />
+    <PackageReference Include="MudBlazor" Version="6.0.10" />
+    <PackageReference Include="Toolbelt.Blazor.HotKeys" Version="12.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Client.Infrastructure\Client.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\" />
+    <Folder Include="Components\" />
+    <Folder Include="MB\Shared\Components\Dialogs\Chart\" />
+    <Folder Include="Pages\WorkshopManagement\BookingModule\Components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Telerik.Blazor">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.Blazor.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.DataSource">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.DataSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Documents.SpreadsheetStreaming">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.Documents.SpreadsheetStreaming.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Recurrence">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.Recurrence.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.ReportViewer.Blazor">
+      <HintPath>..\Libs\Libs\Libs\TelerikReports\Telerik.ReportViewer.Blazor.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Zip">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.Zip.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+
+</Project>

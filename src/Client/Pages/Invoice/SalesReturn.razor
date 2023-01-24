@@ -1,0 +1,131 @@
+﻿@page "/transaction/salesreturn/"
+@using Toolbelt.Blazor.HotKeys;
+@inject HotKeys HotKeys;
+@using BlueLotus360.CleanArchitecture.Domain.Settings;
+
+
+@if (formDefinition != null && formDefinition.Children.Count > 0)
+{
+    @if (isSaving)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    }
+    @if (showAlert)
+    {
+        <BLAlert CloseAlert="(()=>showAlert=false)" AlertContent="Can't add this item to grid ,please check error in below" AlertStatus="Error" />
+    }
+
+    <div class="detail-wrapper">
+
+        <div class="header-section">
+
+            <UIBuilder FormObject="formDefinition"
+                   DataObject="transaction"
+                   InteractionLogics="_interactionLogic"
+                   ObjectHelpers="_objectHelpers"
+                   @ref="_refBuilder" />
+
+            <div class="bl-pop-up @(GetFromInvoiceShown ? "":"d-none")">
+
+
+                <GetFromTransaction UIDefinition="GetFromTransactionUI"
+                                ObjectHelpers="_objectHelpers"
+                                InteractionLogics="_interactionLogic"
+                                FindLocation="transaction.Location"
+                                FromTransactionOpened="OnFromTransactionOpened"
+                                @ref="_refGetFromUI" />
+
+
+
+            </div>
+
+            <div class="bl-pop-up @(FindTransactionShown ? "":"d-none")">
+
+                @if (FindTransactionShown)
+                {
+                    <FindTransaction UIElement="findTrandsactionUI"
+                             OnCloseButtonClick="CloseFindTransactionWindow"
+                             OnOpenClick="OnOpenTransactionClick" />
+
+                }
+
+            </div>
+
+
+            <div class=" @(isExpansionPanelOpen?"bl-expansion-panel":"d-none")">
+                <MudExpansionPanels>
+                    <MudExpansionPanel Text="@($"Show Errors ({validator.UserMessages.UserMessages.Count()})")">
+                        @foreach (var error in validator.UserMessages.UserMessages)
+                        {
+                            <MudText Color="@Color.Error">@error.Message</MudText>
+                        }
+                    </MudExpansionPanel>
+                </MudExpansionPanels>
+            </div>
+        </div>
+        <div class="detailsection">
+            <div class="tdef">
+                <MudTable Items="@transaction.InvoiceLineItems.Where(x=>x.IsActive==1)" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@tableloading"
+                    ReadOnly=false CanCancelEdit=true
+                      LoadingProgressColor="Color.Info" CustomFooter="true" Dense="true" FixedHeader="true" FixedFooter="true" Height="400px" @ref="_table">
+                    <HeaderContent>
+                        <MudTh>#</MudTh>
+                        <MudTh>Item Name</MudTh>
+                        <MudTh Style="text-align:right">Trn Unit</MudTh>
+                        <MudTh Style="text-align:right">Trn Rate</MudTh>
+                        <MudTh Style="text-align:right">Trn Qty</MudTh>
+                        <MudTh Style="text-align:right">Dis(%)</MudTh>
+                        <MudTh Style="text-align:right">Dis Amt</MudTh>
+                        <MudTh Style="text-align:right">Line Total</MudTh>
+                        <MudTh Style="text-align:right">Actions</MudTh>
+                    </HeaderContent>
+
+                    <RowTemplate>
+                        <MudTd DataLabel="#">@context.LineNumber</MudTd>
+                        <MudTd DataLabel="Item Name">@context.TransactionItem.ItemName</MudTd>
+                        <MudTd Style="text-align:right" DataLabel="Transaction Unit">@context.TransactionUnit</MudTd>
+                        <MudTd Style="text-align:right" DataLabel="Transaction Rate">@context.TransactionRate.ToString("N2")</MudTd>
+                        <MudTd Style="text-align:right" DataLabel="Quantity">@context.TransactionQuantity</MudTd>
+                        <MudTd Style="text-align:right" DataLabel="Dis(%)">@context.DiscountPercentage.ToString("N2")</MudTd>
+                        <MudTd Style="text-align:right" DataLabel="Dis Amts">@context.GetLineDiscount().ToString("N2")</MudTd>
+                        <MudTd Style="text-align:right" DataLabel="Line Total">@context.GetLineTotalWithDiscount().ToString("N2")</MudTd>
+                        <MudTd Style="text-align:right" DataLabel="Actions">
+                            <div class="" Style="text-align:right">
+                                <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Small" Class="ma-2 mr-2" Color="Color.Info" OnClick="()=>OnItemEditClick(context)" />
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Small" Class="ma-2" Color="Color.Error" OnClick="()=>OnOrderItemDelete(context)" />
+                            </div>
+
+
+                        </MudTd>
+
+                    </RowTemplate>
+                  
+                    <FooterContent>
+
+                        <MudTFootRow Class="bold-text bg-tr-g1">
+                            <MudTd colspan="3">Total</MudTd>
+
+                            <MudTd Style="text-align:right">@transaction.GetTransactionRateTotal().ToString("N2")</MudTd>
+                            <MudTd Style="text-align:right">@transaction.GetQuantityTotal().ToString("N2")</MudTd>
+                            <MudTd></MudTd>
+                            <MudTd Style="text-align:right">@transaction.GetOrderDiscountTotal().ToString("N2")</MudTd>
+                            <MudTd Style="text-align:right">@transaction.GetOrderTotalWithDiscounts().ToString("N2")</MudTd>
+                            <MudTd></MudTd>
+                        </MudTFootRow>
+
+                    </FooterContent>
+
+                </MudTable>
+            </div>
+        </div>
+
+    </div>
+
+
+
+}
+else
+{
+    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">Please wait while we fetch form definitons...</MudAlert>
+}
+

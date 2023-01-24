@@ -1,0 +1,60 @@
+﻿@using BlueLotus360.Data
+@using Telerik.Blazor.Components
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<MudRTLProvider RightToLeft="@_rightToLeft">
+	<MudThemeProvider Theme="_currentTheme" />
+	<MudDialogProvider />
+	<MudSnackbarProvider />
+	<AuthorizeView>
+		<NotAuthorized>
+		
+			<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+				<MudPaper Elevation="0" Class="pa-8" Style="width: 500px;">					
+					<Login />
+				
+				</MudPaper>
+			</MudContainer>
+		</NotAuthorized>
+		<Authorized>
+			
+			@if (!context.User.HasClaim("role", "CompanyAuthSuccess")  )
+			{
+				<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+					<MudPaper Elevation="0" Class="pa-8" Style="width: 500px;">
+						<CompanySelecttion />
+					</MudPaper>
+				</MudContainer>
+
+			}
+			else
+			{	
+				
+					
+
+			
+				<MudLayout>
+					@*<MainBody OnDarkModeToggle="@DarkMode" OnRightToLeftToggle="@RightToLeftToggle">
+													@Body
+
+					</MainBody>*@
+					<TelerikRootComponent>
+						<BlueLotus360.Com.UI.Definitions.MB.Shared.BLMiniDrawer >
+											
+												
+														@Body
+													
+											
+
+						
+						</BlueLotus360.Com.UI.Definitions.MB.Shared.BLMiniDrawer>
+				    </TelerikRootComponent>
+				</MudLayout>
+			}
+
+		</Authorized>
+	</AuthorizeView>
+
+</MudRTLProvider>

@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>BlueLotus360.Com.Infrastructure</RootNamespace>
+    <AssemblyName>BlueLotus360.Com.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Managers\Audit\**" />
+    <Compile Remove="Managers\Catalog\**" />
+    <Compile Remove="Managers\Communication\**" />
+    <EmbeddedResource Remove="Managers\Audit\**" />
+    <EmbeddedResource Remove="Managers\Catalog\**" />
+    <EmbeddedResource Remove="Managers\Communication\**" />
+    <None Remove="Managers\Audit\**" />
+    <None Remove="Managers\Catalog\**" />
+    <None Remove="Managers\Communication\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="MudBlazor" Version="6.0.2" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
+    <PackageReference Include="Reshiru.Blazor.IndexedDB.Framework" Version="1.0.1" />
+    <PackageReference Include="RestSharp" Version="108.0.2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Managers\Identity\Roles\" />
+    <Folder Include="NewFolder\" />
+    <Folder Include="OrderPlatforms\Ubereats\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+﻿
+.report-pop-up {
+    position: fixed;
+    background: #363936d6;
+    z-index: 1400;
+    left: 50px;
+    right: 0;
+    bottom: 0px;
+    top: 64px;
+    display: flex;
+    align-items: center;
+}
+@media (max-width: 960px) {
+    .report-pop-up {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        top: 64px;
+
+    }
+    .report-pop-up .trv-pages-area.interactive .trv-page-container .trv-page-wrapper .trv-report-page {
+        overflow: scroll !important;
+        padding: 0.5em !important;
+    }
+}

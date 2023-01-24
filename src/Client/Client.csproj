@@ -1,0 +1,127 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+    <RootNamespace>BL10.Com.Client</RootNamespace>
+    <AssemblyName>BL10.Com.Client</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Shared\NewFolder\**" />
+    <Content Remove="Shared\NewFolder\**" />
+    <EmbeddedResource Remove="Shared\NewFolder\**" />
+    <None Remove="Shared\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Shared\Components\BlazorHeroLogo.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Shared\Components\Loading.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazor-ApexCharts" Version="0.7.0-beta" />
+    <PackageReference Include="BlazorBarcodeScanner.ZXing.JS" Version="0.2.5" />
+    <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
+    <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
+    <PackageReference Include="BrowserInterop" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    <PackageReference Include="MudBlazor" Version="6.0.2" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
+    <PackageReference Include="Toolbelt.Blazor.HotKeys" Version="12.0.0" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Shared\Components\BlazorHeroLogo.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Shared\Components\BlazorHeroLogo.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Shared\Components\Loading.razor.css" />
+    <Content Include="wwwroot\node_modules\.package-lock.json" />
+    <Content Include="wwwroot\node_modules\animate.css\animate.compat.css" />
+    <Content Include="wwwroot\node_modules\animate.css\animate.css" />
+    <Content Include="wwwroot\node_modules\animate.css\animate.min.css" />
+    <Content Include="wwwroot\node_modules\animate.css\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\DashBoard\FinanceDashBoard.razor" />
+    <None Include="Pages\DashBoard\LocationViseStock.razor" />
+    <None Include="Pages\DashBoard\SalesByLocation.razor" />
+    <None Include="Pages\Human Resource\Attendence\GeoAttendence.razor" />
+    <None Include="Pages\Human Resource\Leave\PendingLeaveRequest.razor" />
+    <None Include="Pages\Human Resource\Leave\SelfLeaveRequest.razor" />
+    <None Include="Pages\Human Resource\Profile\EmployeeDetail.razor" />
+    <None Include="Pages\Human Resource\Profile\EmployeePortal.razor" />
+    <None Include="Pages\Human Resource\Profile\EmpProfile.razor" />
+    <None Include="Pages\InventoryManagement\ScanItemTransferLND\ScanBundle.razor" />
+    <None Include="Pages\InventoryManagement\ScanItemTransferLND\ScanInvoice.razor" />
+    <None Include="Pages\InventoryManagement\ScanItemTransferLND\ScanItem.razor" />
+    <None Include="Shared\Components\BlazorHeroLogo.razor" />
+    <None Include="Shared\Components\Chart\BarChart\BLBarChart.razor" />
+    <None Include="Shared\Components\Chart\BLChartContainer.razor" />
+    <None Include="Shared\Components\Chart\EmptyChart.razor" />
+    <None Include="Shared\Components\Combo\NextApproveStatusCombo.razor" />
+    <None Include="Shared\Dialogs\Chart\Finance\DebtorsCreditorsAgeAnalysis.razor" />
+    <None Include="Shared\Dialogs\Chart\Finance\Monthly_GPft_NETPft_DT.razor" />
+    <None Include="Shared\Popups\HR\AddEditAttendence.razor" />
+    <None Include="Shared\Popups\HR\CheckEntitlement.razor" />
+    <None Include="Shared\Popups\HR\CreateAttendence.razor" />
+    <None Include="Shared\Popups\HR\LeaveBalanceZero.razor" />
+    <None Include="Shared\Popups\HR\LeaveSummaryPopup.razor" />
+    <None Include="Shared\Popups\HR\LeaveValidation.razor" />
+    <None Include="Shared\Popups\HR\PaySlipPopUp.razor" />
+    <None Include="Shared\Popups\InventoryManagement\ScanItemTransfer\FindPopUp.razor" />
+    <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    <None Include="wwwroot\node_modules\animate.css\LICENSE" />
+    <None Include="wwwroot\node_modules\animate.css\README.md" />
+    <None Include="wwwroot\plugins\Telerik.UI.for.Blazor\js\telerik-blazor.js" />
+    <None Include="wwwroot\js\barcodereader\barcode.js" />
+    <None Include="wwwroot\js\barcodereader\qrcode.min.js" />
+    <None Include="wwwroot\js\barcodereader\zxing.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Client.Infrastructure\Client.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Telerik.Blazor">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.Blazor.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.DataSource">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.DataSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Documents.SpreadsheetStreaming">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.Documents.SpreadsheetStreaming.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Recurrence">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.Recurrence.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.ReportViewer.Blazor">
+      <HintPath>..\Libs\Libs\Libs\TelerikReports\Telerik.ReportViewer.Blazor.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Zip">
+      <HintPath>..\Libs\Libs\Libs\TelerikUI\Telerik.Zip.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

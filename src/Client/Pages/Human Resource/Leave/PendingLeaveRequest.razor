@@ -1,0 +1,122 @@
+﻿@page "/HumanResource/Pending_Leave_Request"
+
+@if (isProcessing)
+{
+   <MudProgressLinear Color="MudBlazor.Color.Primary" Indeterminate="true" Class="my-7" />
+}
+
+@if (formDefinition != null && formDefinition.Children.Count > 0)
+{
+<MudPaper Class="pa-3" Style="height:100vh;">
+    <MudGrid>
+        <MudItem xs="12" Class="pa-3">
+                       
+                        <MudToggleIconButton Toggled="@open" ToggledChanged="ToggleDrawer"
+                                            Icon="@Icons.TwoTone.FilterAlt" Title="Filter"
+                                            ToggledIcon="@Icons.TwoTone.FilterAlt" ToggledTitle="Filter Off" ToggledColor="Color.Primary"  Color="Color.Primary"/>
+        </MudItem>
+        <MudItem xs="12" md="4" Style="border:1px solid #c4c4c4;border-radius:10px 10px 0px 0px;padding:40px;0px;" >
+            <MudText Typo="Typo.h6" Class="m-2"><b>Filter</b></MudText>
+            <UIBuilder FormObject="formDefinition"
+                       DataObject="_leaveRequest"
+                       InteractionLogics="_interactionLogic"
+                       ObjectHelpers="_objectHelpers"
+                       @ref="_refBuilder" />
+        </MudItem>
+
+        <MudItem xs="12" md="8">
+
+
+                        <BLTable FormObject="formDefinition" 
+                                 DataObject="_leaves" 
+                                 InteractionLogics="_interactionLogic" 
+                                 ObjectHelpers="_objectHelpers" 
+						         Height="400px"
+                                 @ref="_blTb" />
+
+                    </MudItem>
+    </MudGrid>
+
+
+    @*<MudGrid Class="mt-3">
+        <MudItem xs="12" md="4" Class="pa-3">
+                    <UIBuilder FormObject="formDefinition"
+                       DataObject="_leaveRequest"
+                       InteractionLogics="_interactionLogic"
+                       ObjectHelpers="_objectHelpers"
+                       @ref="_refBuilder" />
+        </MudItem>
+
+        <MudItem xs="12" md="8" Class="pa-3">
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudIconButton Icon="@Icons.TwoTone.FilterAlt" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium"/>
+                    </MudItem>
+
+                    <MudItem xs="12">
+
+                        @*<MudTable Items="@_leaves"  Hover="true">
+
+                                <ToolBarContent>
+                                    <MudText Typo="Typo.h6">Pending Leave Request</MudText>
+                                    <MudSpacer />
+                                    
+                                </ToolBarContent>
+                                
+                                <HeaderContent>
+                                    
+                                    <MudTh Class="table-text-overflow ">Employee</MudTh>
+                                    <MudTh Class="table-text-overflow ">Leave Type</MudTh>
+                                    <MudTh Class="table-text-overflow ">Remarks</MudTh>
+                                    <MudTh Class="table-text-overflow ">From Date</MudTh>
+                                    <MudTh Class="table-text-overflow ">To Date</MudTh>
+                                    <MudTh Class="table-text-overflow ">Leave Days </MudTh>
+                                    <MudTh Class="table-text-overflow ">Reason</MudTh>
+                                    <MudTh Class="table-text-overflow ">Current Status</MudTh>
+                                    <MudTh Class="table-text-overflow ">Next Status</MudTh>
+                                    <MudTh Class="table-text-overflow ">Do you pay for No Pay</MudTh>
+                                    <MudTh></MudTh>
+                                </HeaderContent>
+
+                                <RowTemplate>
+                                    <MudTd DataLabel="Employee">@context.EmpNm</MudTd>
+                                    <MudTd DataLabel="Leave Type">@context.LeaveType</MudTd>
+                                    <MudTd DataLabel="Remarks">@context.OtherReason</MudTd>
+                                    <MudTd DataLabel="From Date">@context.EftvDt</MudTd>
+                                    <MudTd DataLabel="To Date">@context.ToD</MudTd>
+                                    <MudTd DataLabel="Leave Days">@context.LevDays</MudTd>
+                                    <MudTd DataLabel="Reason">@context.LevReason</MudTd>
+                                    <MudTd DataLabel="Current Status">@context.Status</MudTd>
+                                    <MudTd DataLabel="Next Status">@context.NextStatus</MudTd>
+                                    <MudTd DataLabel="Do you pay for No Pay">@context.IsPaid</MudTd>
+                                    <MudTd>
+                                        <MudButton OnClick="@(async()=>await LoadLeaveSummary(context.EmpKy,new DateTime(DateTime.Now.Year, 1, 1)))">View Summary</MudButton>
+                                    </MudTd>
+                                    <MudTd>
+                                        <MudButton OnClick="@(async()=>await LevTrnAprInsert(context.LevTrnKy))">Save</MudButton>
+                                    </MudTd>
+                                </RowTemplate>
+                                
+                                <PagerContent>
+                                    <MudTablePager />
+                                </PagerContent>
+                        </MudTable>*@
+
+                        @*<BLTable FormObject="formDefinition" 
+                                 DataObject="_leaves" 
+                                 InteractionLogics="_interactionLogic" 
+                                 ObjectHelpers="_objectHelpers" 
+						         Height="Height"
+                                 @ref="_blTb" />
+
+                    </MudItem>
+                </MudGrid>
+        </MudItem>
+    </MudGrid>*@
+
+  </MudPaper>
+}
+else
+{
+     <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">Please wait while we fetch form definitons... </MudAlert>
+}

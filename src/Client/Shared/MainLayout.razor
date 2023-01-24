@@ -1,0 +1,55 @@
+﻿@inherits BaseLayout
+@inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> _localizer
+
+<MudRTLProvider RightToLeft="@_rightToLeft">
+	<MudThemeProvider Theme="_currentTheme" />
+	<MudDialogProvider />
+	<MudSnackbarProvider />
+	<AuthorizeView>
+		<NotAuthorized>
+
+			<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+				<MudPaper Elevation="0" Class="pa-8" Style="width: 500px;">
+					<Login />
+				</MudPaper>
+			</MudContainer>
+		</NotAuthorized>
+		<Authorized>
+			@if (!context.User.HasClaim("role", "CompanyAuthSuccess")  )
+			{
+				<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+					<MudPaper Elevation="0" Class="pa-8" Style="width: 500px;">
+						<CompanySelecttion />
+					</MudPaper>
+				</MudContainer>
+
+			}
+			else
+			{	
+				
+					
+
+			
+				<MudLayout>
+					@*<MainBody OnDarkModeToggle="@DarkMode" OnRightToLeftToggle="@RightToLeftToggle">
+						<TelerikRootComponent>
+													@Body
+
+						</TelerikRootComponent>
+					</MainBody>*@
+
+					<BLMiniDrawer>
+						<TelerikRootComponent>
+									@Body
+
+						</TelerikRootComponent>
+						
+					</BLMiniDrawer>
+						
+				</MudLayout>
+			}
+
+		</Authorized>
+	</AuthorizeView>
+
+</MudRTLProvider>

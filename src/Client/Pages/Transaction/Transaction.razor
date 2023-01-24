@@ -1,0 +1,73 @@
+﻿@*@page "/transaction/createtransaction"*@
+
+@*@if (formDefinition != null && formDefinition.Children.Count > 0)
+{
+	<UIBuilder FormObject="formDefinition" DataObject="transaction" InteractionLogics="_interactionLogic" ObjectHelpers="_objectHelpers" />
+
+			<div class="tdef">
+        <MudTable Items="@transaction.InvoiceLineItems" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@tableloading" 
+			LoadingProgressColor="Color.Info" CustomFooter="true" Dense="true" FixedHeader="true" FixedFooter="true"  Height="400px">
+				<HeaderContent>
+					<MudTh>#</MudTh>
+					<MudTh>Item Name</MudTh>
+					<MudTh>Order Location</MudTh>
+					<MudTh Style="text-align:right">Trn Unit</MudTh>
+					<MudTh Style="text-align:right">Trn Rate</MudTh>
+					<MudTh Style="text-align:right">Trn Qty</MudTh>
+					<MudTh Style="text-align:right">Dis(%)</MudTh>
+					<MudTh Style="text-align:right">Dis Amt</MudTh>
+					<MudTh Style="text-align:right">Line Total</MudTh>
+					<MudTh Style="text-align:right">Actions</MudTh>
+				</HeaderContent>
+
+				<RowTemplate>
+					<MudTd DataLabel="#">@context.LineNumber</MudTd>
+					<MudTd DataLabel="Item Name">@context.TransactionItem.ItemName</MudTd>
+					<MudTd DataLabel="Location">@context.TransactionLocation</MudTd>
+					<MudTd Style="text-align:right" DataLabel="Transaction Rate">@context.TransactionUnit</MudTd>
+					<MudTd Style="text-align:right" DataLabel="Transaction Rate">@context.TransactionRate.ToString("N2")</MudTd>
+					<MudTd Style="text-align:right" DataLabel="Quantity">@context.TransactionQuantity.ToString("N2")</MudTd>
+
+
+					<MudTd Style="text-align:right" DataLabel="Dis(%)">@context.DiscountPercentage.ToString("N2")</MudTd>
+					<MudTd Style="text-align:right" DataLabel="Dis Amts">@context.GetLineDiscount().ToString("N2")</MudTd>
+					<MudTd Style="text-align:right" DataLabel="Line Total">@context.GetLineTotalWithDiscount().ToString("N2")</MudTd>
+					<MudTd Style="text-align:right" DataLabel="Line Total">
+				    <MudButton Variant="Variant.Filled" OnClick="()=>OnOrderItemDelete(context)" Size="Size.Small" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+					
+					</MudTd>
+
+				</RowTemplate>
+
+			<FooterContent>
+
+				<MudTFootRow Class="bold-text">
+					<MudTd colspan="4">Total</MudTd>
+
+					<MudTd Style="text-align:right">@transaction.GetOrderRateTotal().ToString("N2")</MudTd>
+					<MudTd Style="text-align:right">@transaction.GetQuantityTotal().ToString("N2")</MudTd>
+					<MudTd></MudTd>
+					<MudTd Style="text-align:right">@transaction.GetOrderDiscountTotal().ToString("N2")</MudTd>
+					<MudTd Style="text-align:right">@transaction.GetOrderTotalWithDiscounts().ToString("N2")</MudTd>
+					<MudTd></MudTd>
+				</MudTFootRow>
+
+			</FooterContent>
+
+		</MudTable>
+	</div>
+
+}
+else
+{
+	<MudAlert Severity="Severity.Info" Variant="Variant.Outlined">Please wait while we fetch form definitons...</MudAlert>
+}
+
+<MudMessageBox @ref="addItem" Title="Warning">
+	<MessageContent>
+
+	</MessageContent>
+	<YesButton>
+		<MudButton Variant="Variant.Filled" Color="Color.Error">Ok</MudButton>
+	</YesButton>
+</MudMessageBox>*@

@@ -1,0 +1,70 @@
+﻿@page "/Item/ItemProfileSimpleV2"
+
+@using Telerik.Blazor;
+@using BL10.CleanArchitecture.Domain.Entities.ItemProfleMobile
+@using BlueLotus360.Com.UI.Definitions.Pages.Reports @*telerik*@
+
+
+@if (formDefinition != null && formDefinition.Children.Count > 0)
+{
+            <AddNewAddress OnAddressCreated="OnCustomerCreateSuccess" @ref="_refNewAddressCreation" />
+
+             <div class="@(isTableLoading?"":"d-none")"> 
+      
+                <MudProgressLinear Color="MudBlazor.Color.Primary" Indeterminate="true" Class="my-7" />
+            </div>
+           
+            //insert 
+            <div class="@(ShowInsertDetails?"":"d-none")">
+
+                 <BLItemProfileSimpleInsertDetails 
+                                             FormObject="insertmodalUIElement"
+                                             DataObject="insertRequest"
+                                             InteractionLogics="_interactionLogic"
+                                             ObjectHelpers="_objectHelpers"
+                                             @ref="_bLItemProfileSimpleInsertDetails" />
+
+            </div>
+
+            @if(showsgrid){
+
+                   //btn group
+                   <UIBuilder FormObject="formDefinition"
+                               DataObject="transaction"
+                               InteractionLogics="_interactionLogic"
+                               ObjectHelpers="_objectHelpers"
+                               @ref="_refBuilder" />
+
+
+                   //grid
+                   <BLTelGrid FormObject="gridUIElement"
+                               DataObject="gridDetails.Where(x=>x.IsAct==true).ToList()"
+                               InteractionLogics="_interactionLogic"
+                               ObjectHelpers="_objectHelpers"
+                               Height="400px"
+                               @ref="_blTb" />
+    
+            }
+
+            //Adding telerik report
+            @if (ReportShown)
+            {
+                <div class="bl-pop-up pl-12 mx-2@(ReportShown ? "":"d-none")">
+                    <MudGrid>
+                        <MudItem xs=12 class="price-list-wrap">
+                    <BLReportViewer ReportSetting="_ShowTelReport"
+                                    CloseReportDelegate="@(()=>{ReportShown=false;})" />
+                        </MudItem>
+                    </MudGrid>
+                    <hr />
+                </div>
+            }
+}
+
+else
+{
+    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">Please wait while we fetch form definitons...</MudAlert>
+}
+
+
+

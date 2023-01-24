@@ -1,0 +1,20 @@
+﻿@page "/Common/SimpleUi"
+
+@if (formDefinition != null && formDefinition.Children.Count > 0)
+{
+    <h3>Simple Form</h3>
+
+    <hr/>
+
+    <UIBuilder FormObject="formDefinition"
+                   DataObject="simpleForm"
+                   InteractionLogics="_interactionLogic"
+                   ObjectHelpers="_objectHelpers"
+                   @ref="_refBuilder" />
+
+                   <hr/>
+}
+else
+{
+    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">Please wait while we fetch form definitons...</MudAlert>
+}

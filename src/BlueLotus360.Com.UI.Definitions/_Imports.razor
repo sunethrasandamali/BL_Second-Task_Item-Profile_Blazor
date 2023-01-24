@@ -1,0 +1,110 @@
+﻿@using System.Net.Http
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components;
+@using Microsoft.JSInterop;
+@using MudBlazor;
+@using MudBlazor.Components;
+@using Blazored.LocalStorage;
+@using BlueLotus360.Com.UI.Definitions.Extensions;
+@using BlueLotus360.CleanArchitecture.Domain.DTO.Object;
+@using BlueLotus360.CleanArchitecture.Domain;
+@using BlueLotus360.CleanArchitecture.Domain.Entities;
+@using  BlueLotus360.Com.Client.Infrastructure.Authentication
+@using BlueLotus360.Com.Infrastructure.Managers.Identity.Authentication
+@using BlueLotus360.Com.Infrastructure.Managers.Identity.Account
+@using BlueLotus360.Com.Infrastructure.Managers.Interceptors
+@using BlueLotus360.Com.Infrastructure.Managers.Preferences
+@using BlueLotus360.Com.Infrastructure.Managers.Identity.Users
+@using BlueLotus360.Com.Infrastructure.Managers.Address
+@using BlueLotus360.Com.Infrastructure.Managers.Company
+@using BlueLotus360.Com.Infrastructure.Managers.NavMenuManager
+@using BlueLotus360.Com.Infrastructure.Managers
+@using BlueLotus360.Com.Infrastructure.Managers.OrderManager
+@using BlueLotus360.Com.Infrastructure.Managers.ReportManager
+@using BlueLotus360.Com.Infrastructure.Managers.TransactionManager
+@using BlueLotus360.Com.Infrastructure.Managers.LocalDbManager
+@using BlueLotus360.Com.Infrastructure.Managers.Printer
+@using BlueLotus360.Com.Infrastructure.Managers.Dashboard
+@using BlueLotus360.Com.Infrastructure.Managers.ItemTransferManager
+@using BlueLotus360.Com.Infrastructure.Managers.HRManager
+@using BlueLotus360.Com.Infrastructure.Managers.AccountProfile
+@using BlueLotus360.Com.Infrastructure.Managers.ItemProfileMobile
+@using BlueLotus360.Com.Infrastructure.Managers.ProjectProfileMobile
+@using BlueLotus360.Com.Infrastructure.Managers.BookingManager
+
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.Chart
+@using BlueLotus360.Com.UI.Definitions.MB.Settings
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.Popups
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.TelerikReportViewer
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.QrBarCode
+@using BlueLotus360.Com.UI.Definitions.Pages.SetUp.Master_Data.Account.AccountProfile.Components
+@using BlueLotus360.Com.UI.Definitions.Pages.SetUp.Master_Data.Item_Profile_Mobile.Components
+@using BlueLotus360.Com.UI.Definitions.Pages.SetUp.Master_Data.Projects.ProjectProfileMobile.Components
+@using BlueLotus360.Com.UI.Definitions.Pages.WorkshopManagement.BookingModule.Components
+@using BlueLotus360.Com.UI.Definitions.Pages.WorkshopManagement.InsuranceCarmart
+@using BlueLotus360.Com.UI.Definitions.Pages.WorkshopManagement.InsuranceCarmart.Component
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.Buttons
+@using Telerik.Blazor.Components
+@using  BlueLotus360.Com.UI.Definitions.MB.Shared.Components.TelerikComponents.Grid
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Dialogs.Chart.Finance
+@using BlueLotus360.CleanArchitecture.Domain.Entities.Dashboard
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.Dialogs
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.Popups.MasterDetailPopup
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.Popups.InventoryManagement.ScanItemTransfer
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.Combo
+@using BlueLotus360.Com.UI.Definitions.Services
+@using BlueLotus360.Com.UI.Definitions.Pages.WorkshopManagement.WorkshopCarmart
+@using BlueLotus360.Com.UI.Definitions.Pages.WorkshopManagement.WorkshopCarmart.Component
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.Popups.TelerikPopups
+@using BlueLotus360.Com.Infrastructure.Managers.WorkShopManagement
+@using BlueLotus360.Com.UI.Definitions.Pages.WorkshopManagement.CarWash
+@using BlueLotus360.Com.UI.Definitions.Pages.WorkshopManagement.CarWash.Components
+@using BlueLotus360.Com.UI.Definitions.MB.Shared.Components.TelerikComponents.Combo
+@using BlueLotus360.Com.Infrastructure.Managers.UploadManager
+@using BlueLotus360.Com.Infrastructure.Managers.APIManager
+
+@*insert/update*@
+@using BlueLotus360.Com.UI.Definitions.Pages.SetUp.Master_Data.Item_Profile_Simple_V2.Components
+
+
+
+@inject IAuthenticationManager _authenticationManager
+@inject IAccountManager _accountManager
+@inject NavigationManager _navigationManager
+@inject BL10AuthProvider _stateProvider
+@inject IAuthorizationService _authorizationService
+@inject ISnackbar _snackBar
+@inject IDialogService _dialogService
+@inject HttpClient _httpClient
+@inject IHttpInterceptorManager _interceptor
+@inject ClientPreferenceManager _clientPreferenceManager
+@inject IUserManager _userManager
+@inject ILocalStorageService _localStorage;
+@inject IJSRuntime _jsRuntime;
+@inject ICompanyManager _companyManager;
+@inject INavMenuManager _navManger;
+@inject IComboDataManager _comboManager;
+@inject IOrderManager _orderManager;
+@inject IReportManager _reportManager;
+@inject ITransactionManager _transactionManager;
+@inject IPriceListManager _pricelistManager;
+@inject IInvoicePrinterManager _printerManager;
+@inject IDashboardManager _dashboardManager;
+@inject Blazored.SessionStorage.ISessionStorageService _sessionStorage;
+@inject IItemTransferManager _itemTransferManager;
+@inject IHRManager _hrManager;
+@inject IAddressManager _addressManager;
+@inject IHttpClientFactory _clientFactory
+@inject IProfileManager _profileManager;
+@inject IItemProfileMobileManager _itemProfileMobileManager;      
+@inject IProjectProfileMobileManager _projectProfileMobileManager;
+@inject AppStateService appStateService;
+@inject IBookingManager _bookingManager;
+@inject IWorkShopManager _workshopManager;
+@inject IUploadManager _uploadManager;
+@inject IAPIManager _apiManager;

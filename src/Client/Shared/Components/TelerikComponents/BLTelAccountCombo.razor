@@ -1,0 +1,33 @@
+﻿@using BlueLotus360.CleanArchitecture.Domain.DTO.Object;
+@using BlueLotus360.CleanArchitecture.Domain.Entities;
+
+<MudItem xs="width" class=@css_class md="@UIElement.Width">
+    @if (AccountResponses == null)
+    {
+        <MudSkeleton Animation="Animation.Wave" Width="100%" />
+    }
+    else
+    {
+        <div class="w-100">
+            <div class="col-12">
+                <div class="bk-k-lable">@UIElement.ElementCaption</div>
+            </div>
+            <div class="col-12">
+                <TelerikComboBox Data="@AccountResponses" TextField="AccountName" ValueField="AccountKey"
+                             TValue="long" TItem="AccountResponse"
+                             ValueChanged="(long  s)=>OnComboValueChangedTel(s)"
+                             Value="selectedAccount.AccountKey"
+                             FilterOperator="Telerik.Blazor.StringFilterOperator.Contains"
+                
+                >
+                </TelerikComboBox>
+
+            </div>
+        </div>
+
+
+
+    }
+</MudItem>
+
+

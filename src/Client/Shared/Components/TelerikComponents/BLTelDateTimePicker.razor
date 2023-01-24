@@ -1,0 +1,29 @@
+﻿@using BlueLotus360.CleanArchitecture.Domain.DTO.Object;
+@using BlueLotus360.CleanArchitecture.Domain.Entities;
+
+
+<MudItem xs="12" class=@css_class md="@UIElement.Width">
+
+
+    <div class="w-100">
+        <div class="col-12">
+            <div class="bk-k-lable">@UIElement.ElementCaption</div>
+        </div>
+        <div class="col-12">
+            <TelerikDateTimePicker Format="@UIElement.Format"
+                               Min="@Min"
+                               Value="dateValue"
+                               ValueChanged="(DateTime? value)=>OnDateChange(value)"
+                               
+            >
+            </TelerikDateTimePicker>
+
+        </div>
+    </div>
+
+
+
+
+</MudItem>
+
+

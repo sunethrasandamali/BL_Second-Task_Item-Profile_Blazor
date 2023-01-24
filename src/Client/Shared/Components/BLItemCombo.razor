@@ -1,0 +1,18 @@
+﻿@using BlueLotus360.CleanArchitecture.Domain.DTO.Object;
+@using BlueLotus360.CleanArchitecture.Domain.Entities;
+<MudItem xs="12" class=@css_class md="@UIElement.Width">
+    @if (ItemRes == null)
+    {
+        <MudSkeleton Animation="Animation.Wave" Width="100%" />
+    }
+    else
+    {
+        <MudAutocomplete T="ItemResponse"
+                     Label="@UIElement.ElementCaption" SearchFunc="@OnComboSearch"
+                     Value="selecteditemResponse"
+                     ValueChanged="OnComboValueChanged" Text="@GetComboDisplayText()"
+                     Variant="UIDefaults.DefaultControlVariants" DebounceInterval="700" 
+                     @ref="@_refItemCombo"
+                     />
+    }
+</MudItem>

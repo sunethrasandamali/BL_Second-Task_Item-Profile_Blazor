@@ -1,0 +1,137 @@
+﻿@using BlueLotus360.CleanArchitecture.Domain.Entities
+@using Telerik.Blazor.Components
+
+
+
+    @*<MudItem xs="2" Class="d-flex justify-content-center align-iitems-center">
+        <div class="pin-button" @onclick="OpenPinpoup">
+            <img src="/img/pin.svg" width="100%" />
+            <span>Add Shortcuts</span>
+        </div>
+         
+    </MudItem>*@
+
+            @if (pincards!=null && pincards.Count()>0)
+            {
+                @foreach (var pincard in pincards)
+                {
+                    @if (!pincard.MenuCaption.Equals("Add Shortcuts"))
+                    {
+                        <MudItem xs="6" md="2"  @onclick="@(async()=> await NavigateToNewTab(pincard.GetPathURL()))">
+                            <MudCard Class="pin-card" Style="@($"background:{@color_arr[pincards.IndexOf(pincard)]};")" title="@pincard.MenuCaption">  
+                                  <MudCardHeader>
+                                      <CardHeaderContent>
+                                          
+                                      </CardHeaderContent>
+                                      <CardHeaderActions>
+                                          <MudMenu Icon="@Icons.Material.Filled.MoreVert" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.CenterLeft">
+                                              <MudMenuItem   OnClick="@(async()=>await Unpin(pincard.MenuCaption))"><MudIcon Icon="@Icons.TwoTone.BookmarkRemove"></MudIcon> Unpin</MudMenuItem>
+                                          </MudMenu>
+                                      </CardHeaderActions>
+                                  </MudCardHeader>
+                                  <MudCardContent>
+                                      @if (!string.IsNullOrEmpty(pincard.MenuCaption) && pincard.MenuCaption.Length > 0)
+                                       {
+                                              <MudText>@pincard.MenuCaption</MudText>
+                                       }
+                                                           
+                                  </MudCardContent>
+                            </MudCard>
+                        </MudItem>
+                    }
+                    else
+                    {
+                         <MudItem xs="6" md="2"  @onclick="@OpenPinpoup">
+                            <MudCard Class="pin-card-empty">
+                                <MudCardHeader>
+                                      <CardHeaderContent>
+                                          
+                                      </CardHeaderContent>
+                                      <CardHeaderActions>
+                                          
+                                      </CardHeaderActions>
+                                  </MudCardHeader>
+                                  <MudCardContent>                                
+                                            <MudIcon Icon="@Icons.TwoTone.Add"></MudIcon> 
+                                            <MudText>Add Shortcut</MudText>
+                                  </MudCardContent>
+
+                            </MudCard>
+                        </MudItem>
+                    }
+                }
+                @if (pincards.Count()==1)
+                {
+                       <MudItem xs="6" md="10">
+                            <MudCard Class="pin-card-empty-space">   
+                                 <MudCardHeader>
+                                      <CardHeaderContent>
+                                          
+                                      </CardHeaderContent>
+                                      <CardHeaderActions>
+                                          
+                                      </CardHeaderActions>
+                                  </MudCardHeader>
+                                  <MudCardContent>
+                                             <span>Nothing Pinned yet!</span>                      
+                                  </MudCardContent>
+                                  <MudCardActions>
+                                      
+                                  </MudCardActions>
+                            </MudCard>
+                        </MudItem> 
+                }
+                
+            }
+            else
+            {
+                <MudItem xs="12" Class="d-flex justify-content-center align-items-center">
+                      <MudProgressCircular Color="Color.Primary" Style="height:70px;width:70px;" Indeterminate="true" />
+                </MudItem>
+                
+            }
+
+    <MudDialog @bind-IsVisible="IsPinPopupShown"  DisableSidePadding="true" Class="pin-dialog-container">
+            <TitleContent>
+                <span class="text-white">Pin Your Favourites</span>
+            </TitleContent>
+            <DialogContent>
+               <MudContainer Style="max-height: 500px; overflow-y: scroll;" Class="pa-3">
+                    @if (PinnedMenus!=null&& PinnedMenus.SubMenus!=null && PinnedMenus.SubMenus.Count()>0)
+                    {
+                         <TelerikGrid Data=@PinnedMenus.SubMenus Pageable="true" Height="400px">
+                                <GridToolBar>
+                                    <span class="k-toolbar-spacer"></span> @* add this spacer to keep the searchbox on the right *@
+                                    <GridSearchBox />
+                                </GridToolBar>
+                                <GridColumns>
+                                    <GridColumn Field="@(nameof(MenuItem.MenuCaption))" />
+                                    <GridColumn Field=@nameof(MenuItem.Ispinned) >
+                                        <Template Context="ctx">
+                                            @{
+                                                var r = ctx as MenuItem;
+
+                                                if (r != null)
+                                                {
+                                                        <TelerikCheckBox Value="@r.Ispinned" 
+                                                            ValueChanged="@((bool value) => ChangeHandler(value, r.MenuCaption))" />
+                                                }
+                                
+                                             }
+                                        </Template>
+                                    </GridColumn>
+                                    
+                                </GridColumns>
+                        </TelerikGrid>
+                    }
+           
+       
+                </MudContainer>
+            </DialogContent>
+            <DialogActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@UpdatePinSection" Class="px-10">Done</MudButton>
+                <MudButton Variant="Variant.Filled"  OnClick="@CloseDialog" Class="px-10">Close</MudButton>
+            </DialogActions>
+    </MudDialog>
+
+       

@@ -1,0 +1,9 @@
+﻿
+<MudItem xs="12" Class=@css_class  md="@UIElement.Width">
+
+	<MudItem>
+		<label for="@UIElement.ElementID">@UIElement.ElementCaption</label>
+		<TelerikCheckBox Id="@UIElement.ElementID" Value="@CheckBoxValue" ValueChanged="(bool v)=>{CheckBoxChanged(v);}"/>
+		
+	</MudItem>
+</MudItem>

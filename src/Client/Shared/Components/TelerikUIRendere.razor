@@ -1,0 +1,146 @@
+﻿
+<MudGrid Class="@FromSection.CssClass">
+
+    @if (FromSection.Children != null && FromSection.Children.Count > 0)
+    {
+        foreach (var uielement in FromSection.Children)
+        {
+            <span class="d-none element-key">@uielement.ElementKey</span>
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("Cmb"))
+            {
+                if (uielement.ElementID != null && uielement.ElementID.Equals("CodeBase"))
+                {
+                    <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelCodeBaseCombo UIElement="uielement" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                }
+                if (uielement.ElementID != null && uielement.ElementID.Equals("Address"))
+                {
+                    <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelAddressCombo UIElement="uielement" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                }
+
+                if (uielement.ElementID != null && uielement.ElementID.Equals("Item"))
+                {
+                   <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelItemCombo UIElement="uielement" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                }
+
+                if (uielement.ElementID != null && uielement.ElementID.Equals("Unit"))
+                {
+                    <BLUnitCombo UIElement="uielement" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+                }
+
+                if (uielement.ElementID != null && uielement.ElementID.Equals("Account"))
+                {
+
+                    <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelAccountCombo UIElement="uielement" ComboDataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+
+                }
+
+            }
+
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("NumericBox"))
+            {
+
+                <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelNumericBox UIElement="uielement" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" />
+            }
+
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("ReadOnlyNB"))
+            {
+
+                <BLNumericBox UIElement="uielement" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" IsReadOnly=true />
+            }
+
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("TextBox"))
+            {
+
+                <BLTextBox UIElement="uielement" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers"></BLTextBox>
+            }
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("TextArea"))
+            {
+
+                <BLTextArea UIElement="uielement" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers"></BLTextArea>
+            }
+
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("Label"))
+            {
+
+                <BLLabel UIElement="uielement" DataObject="DataObject" ObjectHelpers="ObjectHelpers"></BLLabel>
+            }
+
+             @if (uielement.ElementType != null && uielement.ElementType.Equals("Switch"))
+            {
+                <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelSwitch FromSection="uielement" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers">
+
+                </BL10.Com.Client.Shared.Components.TelerikComponents.BLTelSwitch>
+            }
+
+
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("MultiRadio"))
+            {
+
+                <BLMultiRadio UIElement="uielement" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers"></BLMultiRadio>
+            }
+
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("CheckBox"))
+            {
+
+                <BLCheckBox UIElement="uielement" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers"></BLCheckBox>
+            }
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("ButtonGroup"))
+            {
+                <BLGroupButton DataObject="DataObject" InteractionLogics="InteractionLogics" FromSection="uielement" />
+            }
+
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("Button"))
+            {
+                <BLButton DataObject="DataObject" InteractionLogics="InteractionLogics" FromSection="uielement" ObjectHelpers="ObjectHelpers" />
+            }
+            
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("DatePicker"))
+            {
+                <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelDatePicker DataObject="DataObject" InteractionLogics="InteractionLogics" UIElement="uielement" ObjectHelpers="ObjectHelpers" />
+            }
+
+             @if (uielement.ElementType != null && uielement.ElementType.Equals("TimePicker"))
+            {
+                <BL10.Com.Client.Shared.Components.TelerikComponents.BLTelDateTimePicker DataObject="DataObject" InteractionLogics="InteractionLogics" UIElement="uielement" ObjectHelpers="ObjectHelpers" />
+            }
+
+            @if (uielement.ElementType != null && uielement.ElementID.Equals("Typo"))
+            {
+
+                <BLTypo DataObject="DataObject" InteractionLogics="InteractionLogics" FromSection="uielement" ObjectHelpers="ObjectHelpers" />
+
+            }
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("HorizontalLine"))
+            {
+                <MudItem md="uielement.Width">
+                    <MudDivider />
+                </MudItem>
+            }
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("ImageBox"))
+            {
+                <BLImageBox DataObject="DataObject" InteractionLogics="InteractionLogics" UIElement="uielement" ObjectHelpers="ObjectHelpers" />
+
+            }
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("ReadOnlyTextBox"))
+            {
+                <BLTextBox UIElement="uielement" DataObject="DataObject" InteractionLogics="InteractionLogics" ObjectHelpers="ObjectHelpers" IsReadOnly="true"></BLTextBox>
+
+            }
+
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("OffSet"))
+            {
+                <MudItem xs="12" md="@uielement.Width">
+                </MudItem>
+
+            }
+            @if (uielement.ElementType != null && uielement.ElementType.Equals("Card"))
+            {
+                <BLCard DataObject="DataObject" InteractionLogics="InteractionLogics" UIElement="uielement" ObjectHelpers="ObjectHelpers" />
+            }
+        }
+
+    }
+
+</MudGrid>
+
+

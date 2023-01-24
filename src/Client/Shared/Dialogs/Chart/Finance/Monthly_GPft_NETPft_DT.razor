@@ -1,0 +1,89 @@
+﻿@using ApexCharts;
+
+
+
+<MudDialog>
+
+	<DialogContent>
+		<MudContainer  Class="dc2" Style="overflow-x: scroll;">
+            @*<MudItem Class="d-flex justify-content-end align-items-baseline my-2">
+                <MudButton OnClick="Back"
+                           Color="MudBlazor.Color.Primary" 
+                           Variant="Variant.Filled"
+                           StartIcon="@Icons.TwoTone.ArrowBack">Back</MudButton>
+            </MudItem>*@
+			<MudPaper Class="finance-dt-popup">
+                @if (Monthly_GPft_NETPft .Count() > 0)
+                {
+                    <ApexChart @ref=_chart TItem="GPft_NetPft_DT"
+                                                            Title="MONTHLY GROSS PROFIT & NET PROFIT"
+                                                            Options="@options"
+                                                            Debug>
+
+                                                        <ApexPointSeries TItem="GPft_NetPft_DT"
+                                                             Items="Monthly_GPft_NETPft"
+                                                             Name="Revenue"
+                                                             SeriesType="SeriesType.Bar" 
+                                                             XValue="@(e => e.YYYY_MM)"
+                                                             YValue="@(e => Convert.ToDecimal(e.Revenue))"
+                                                             OrderByDescending="e=>e.X"/>
+
+                                                        <ApexPointSeries TItem="GPft_NetPft_DT"
+                                                             Items="Monthly_GPft_NETPft"
+                                                             Name="Cost Of Sale "
+                                                             SeriesType="SeriesType.Bar" 
+                                                             XValue="@(e => e.YYYY_MM)"
+                                                             YValue="@(e => Convert.ToDecimal(e.CostOfSale))"
+                                                             OrderByDescending="e=>e.X"/>
+
+                                                        <ApexPointSeries TItem="GPft_NetPft_DT"
+                                                             Items="Monthly_GPft_NETPft"
+                                                             Name="Gross Profit"
+                                                             SeriesType="SeriesType.Line" 
+                                                             XValue="@(e => e.YYYY_MM)"
+                                                             YValue="@(e => Convert.ToDecimal(e.GrsProfit))"
+                                                             OrderByDescending="e=>e.X"/>
+
+                                                        <ApexPointSeries TItem="GPft_NetPft_DT"
+                                                             Items="Monthly_GPft_NETPft"
+                                                             Name="Other Income"
+                                                             SeriesType="SeriesType.Bar" 
+                                                             XValue="@(e => e.YYYY_MM)"
+                                                             YValue="@(e => Convert.ToDecimal(e.Income))"
+                                                             OrderByDescending="e=>e.X"/>
+
+                                                        <ApexPointSeries TItem="GPft_NetPft_DT"
+                                                             Items="Monthly_GPft_NETPft"
+                                                             Name="Other Expense"
+                                                             SeriesType="SeriesType.Bar" 
+                                                             XValue="@(e => e.YYYY_MM)"
+                                                             YValue="@(e => Convert.ToDecimal(e.Expence))"
+                                                             OrderByDescending="e=>e.X"/>
+
+                                                        <ApexPointSeries TItem="GPft_NetPft_DT"
+                                                             Items="Monthly_GPft_NETPft"
+                                                             Name="Net Profit"
+                                                             SeriesType="SeriesType.Line" 
+                                                             XValue="@(e => e.YYYY_MM)"
+                                                             YValue="@(e => Convert.ToDecimal(e.NetProfit))"
+                                                             OrderByDescending="e=>e.X"/>
+
+                                                        
+
+                      </ApexChart>
+                }
+                else{
+
+                   <MudPaper Style="height:269px;" Class="d-flex justify-content-center align-items-center">
+                       <EmptyChart @ref="empty_chart" IsChartEmpty=true/>
+                   </MudPaper>  
+
+                }
+            </MudPaper>
+			
+		</MudContainer>
+
+	</DialogContent>
+
+	
+</MudDialog>

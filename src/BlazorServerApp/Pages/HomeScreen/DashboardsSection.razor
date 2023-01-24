@@ -1,0 +1,17 @@
+﻿<MudGrid>
+                          @foreach (var pincard in pincards)
+                         {
+                            <MudItem xs="4" Style="height:100%;">
+                                <div class="dashboard-tile-card">
+                                   
+                                    <div class="dashboard-tile-icon ">
+                                        <img src="/img/finance.svg" width="50%" />
+                                    </div>
+                                    <div class="dashboard-card-action">
+                                        @*<a class="text-white"  @onclick="@(()=>_navigationManager.NavigateTo(""))">...</a>*@
+                                        <a class="text-white">Coming Soon...</a><MudIcon Style="@($"color:{Colors.Grey.Lighten5};")" Icon="@Icons.Filled.ArrowForward"></MudIcon>
+                                    </div>
+                                </div>
+                            </MudItem>
+                         }
+ </MudGrid>

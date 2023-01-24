@@ -1,0 +1,8 @@
+﻿@page "/"
+@namespace BlueLotus360.Com.UI.BlazorServer.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+   @(await Html.RenderComponentAsync<App>(RenderMode.Server))

@@ -1,0 +1,101 @@
+﻿@page "/Transaction/ScanBundle"
+
+@if (formDefinition != null && formDefinition.Children.Count > 0)
+{
+    <MudText Typo="Typo.h6">Scan Item Transfer</MudText>
+    <hr/>
+    <MudGrid>
+        <MudItem >
+            <UIBuilder FormObject="formDefinition"
+                       DataObject="_itmTransfer"
+                       InteractionLogics="_interactionLogic"
+                       ObjectHelpers="_objectHelpers"
+                       @ref="_refBuilder" />
+        </MudItem>
+
+        <MudItem xs="12" >
+            <MudExpansionPanel Text="Scan Items" Style="border:1px solid #1e88e5ff;">
+                <MudSimpleTable Dense="true" Hover="true" Bordered="true" Striped="true" Style="overflow-x: auto;">
+                                <thead>
+                                    <tr>
+                                        <th>Invoice No</th>
+                                        <th>Branch Code</th>
+                                        <th>Service Name</th>
+                                        <th>Delivery Date</th>
+                                        <th>Delivery Type</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                 @*@foreach (var row in _itmTransfer.ScanItemTransferLineItem)
+                                    {
+                                        <tr>
+                                                <td>@x</td>
+                                                <td>@x</td>
+                                                <td>@x</td>
+                                                <td>@x</td>
+                                                <td>@x</td>
+                                            
+                                        </tr>
+                                    }*@
+                                    <tr>
+                                        <td>15236</td>
+                                        <td>100D</td>
+                                        <td>yyyyy</td>
+                                        <td>2022/01/12</td>
+                                        <td>//</td>
+                                        <td>//</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15236</td>
+                                        <td>100D</td>
+                                        <td>yyyyy</td>
+                                        <td>2022/01/12</td>
+                                        <td>//</td>
+                                        <td>//</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15236</td>
+                                        <td>100D</td>
+                                        <td>yyyyy</td>
+                                        <td>2022/01/12</td>
+                                        <td>//</td>
+                                        <td>//</td>
+                                    </tr><tr>
+                                        <td>15236</td>
+                                        <td>100D</td>
+                                        <td>yyyyy</td>
+                                        <td>2022/01/12</td>
+                                        <td>//</td>
+                                        <td>//</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15236</td>
+                                        <td>100D</td>
+                                        <td>yyyyy</td>
+                                        <td>2022/01/12</td>
+                                        <td>//</td>
+                                        <td>//</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15236</td>
+                                        <td>100D</td>
+                                        <td>yyyyy</td>
+                                        <td>2022/01/12</td>
+                                        <td>//</td>
+                                        <td>//</td>
+                                    </tr>
+
+                                </tbody>
+                </MudSimpleTable>
+            </MudExpansionPanel>
+        </MudItem>
+    </MudGrid>
+	
+}
+else
+{
+     <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">Please wait while we fetch form definitons... </MudAlert>
+}

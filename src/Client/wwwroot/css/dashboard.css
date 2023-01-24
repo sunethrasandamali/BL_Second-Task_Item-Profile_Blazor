@@ -1,0 +1,26 @@
+﻿
+/*Bl card*/
+/*sales ruby location */
+.sls-crdhgt {
+    height: 160px;
+}
+.sls-card-header .mud-card-header-content h6{
+    font-weight:bold;
+}
+.bl-card-cont-primary {
+    color: #008ffb;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+}
+
+.bl-card-conts-secondary {
+    color: #ff4081ff;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+}
+.dash-board-container{
+    margin-top:20px;
+    border-radius:8px;
+}

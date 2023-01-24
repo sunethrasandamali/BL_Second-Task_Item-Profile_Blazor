@@ -1,0 +1,157 @@
+﻿@page "/Invoice/DetailInvoice/"
+@using BlueLotus360.CleanArchitecture.Domain.Entities.Transaction
+@using Telerik.Blazor
+
+@if (formDefinition != null && formDefinition.Children.Count > 0)
+{
+
+    @if (isSaving)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    }
+    @if (showAlert)
+    {
+        <BLAlert  CloseAlert="(()=>showAlert=false)" AlertContent="Can't add this item to grid ,please check error in below" AlertStatus="Error" />
+    }
+
+     @if (validator.UserMessages.UserMessages.Count()!=0)
+            {
+                <div class=" @(validator.UserMessages.UserMessages.Count()!=0?"bl-expansion-panel":"d-none")">
+                    <MudExpansionPanels>
+                        <MudExpansionPanel Text="@($"Show Errors ({validator.UserMessages.UserMessages.Count()})")">
+                            @foreach (var error in validator.UserMessages.UserMessages)
+                            {
+                                <MudText Color="@Color.Error">@error.Message</MudText>
+                            }
+                        </MudExpansionPanel>
+                    </MudExpansionPanels>
+                </div>
+            }
+
+    <UIBuilder FormObject="formDefinition"
+                   DataObject="transaction"
+                   InteractionLogics="_interactionLogic"
+                   ObjectHelpers="_objectHelpers"
+                   @ref="_refBuilder" />
+
+
+                   @*<MudItem xs="12">
+
+                       <TelerikGrid
+                            Height="400px"
+                            Data=@transaction.InvoiceLineItems
+                            Pageable="true"
+                            Sortable="true"
+                            FilterMode="GridFilterMode.FilterMenu"
+                            Resizable="true"
+                            SelectionMode="GridSelectionMode.Multiple"
+                            PageSize="10">
+
+                            <GridColumns>
+
+                                <GridColumn Field="@nameof(TransactionLineItem.LineNumber)" Title="Line No" Width="195px" />
+                                <GridColumn Field="@nameof(TransactionLineItem.TransactionItem.ItemCode)" Title="Item Code" Width="195px" />
+                                <GridColumn Field="@nameof(TransactionLineItem.TransactionItem.ItemName)" Title="Item Name" Width="195px" />
+
+                                <GridColumn Field="@nameof(TransactionLineItem.Quantity)" Title="Quantity" Width="195px" >
+                                <Template>
+                                    @((context as TransactionLineItem).Quantity.ToString("N2"))
+                                </Template>
+                                </GridColumn>
+
+                                <GridColumn Field="@nameof(TransactionLineItem.Rate)" Title="Rate" Width="195px" >
+                                <Template>
+                                    @((context as TransactionLineItem).Rate.ToString("N2"))
+                                </Template>
+                                </GridColumn>
+
+                                <GridColumn Field="@nameof(TransactionLineItem.GetLineDiscount)" Title="Discount" Width="195px" >
+                                <Template>
+                                    @((context as TransactionLineItem).GetLineDiscount().ToString("N2"))
+                                </Template>
+                                </GridColumn>
+
+                                <GridColumn Field="@nameof(TransactionLineItem.GetLineTotalWithDiscount)" Title="Line Total" Width="195px" >
+                                <Template>
+                                    @((context as TransactionLineItem).GetLineTotalWithDiscount().ToString("N2"))
+                                </Template>
+                                </GridColumn>
+
+                                <GridColumn Title="Actions" Width="195px">
+                                    <Template>
+                                        @if(!ReplacementMode){
+                                            
+                                            @*<TelerikButton Icon="pencil" Class="mr-2" OnClick="OnItemEditClick()"></TelerikButton>
+                                            <TelerikButton Icon="delete" OnClick="OnOrderItemDelete()"></TelerikButton>
+                                        }
+                                    </Template>
+                                </GridColumn>
+
+                            </GridColumns>
+
+                       </TelerikGrid>
+
+                   </MudItem>*@
+
+                   <MudItem xs="12">
+
+                       <MudTable Items="@transaction.InvoiceLineItems.Where(x=>x.IsActive==1)" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@tableloading"
+                      LoadingProgressColor="Color.Info" CustomFooter="true" Dense="true" FixedHeader="true" FixedFooter="true" Height="400px" @ref="_table"
+              
+                >
+                    <HeaderContent>
+                        <MudTh>Line No</MudTh>
+                        <MudTh>Item Name</MudTh>
+                        <MudTh Style="text-align:right">Quantity</MudTh>
+                        <MudTh Style="text-align:right">Rate</MudTh>
+                        <MudTh Style="text-align:right">Discount</MudTh>
+                        <MudTh Style="text-align:right">Line Total</MudTh>
+                        <MudTh Style="text-align:right">Action</MudTh>
+                </HeaderContent>
+
+                <RowTemplate>
+                    <MudTd DataLabel="#">@context.LineNumber</MudTd>
+                    <MudTd DataLabel="Item Name">@context.TransactionItem.ItemName</MudTd>
+                    <MudTd Style="text-align:right" DataLabel="Quantity">@context.Quantity.ToString("N2")</MudTd>
+                    <MudTd Style="text-align:right" DataLabel="Rate">@context.TransactionRate.ToString("N2")</MudTd>
+                    <MudTd Style="text-align:right" DataLabel="Discount">@context.GetLineDiscount().ToString("N2")</MudTd>
+                    <MudTd Style="text-align:right" DataLabel="Line Total">@context.GetLineTotalWithDiscount().ToString("N2")</MudTd>
+                    <MudTd Style="text-align:right" DataLabel="Actions">
+                        <div class="" Style="text-align:right">
+                            @if (!ReplacementMode)
+                                {
+                                <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Small" Class="mr-2" Color="Color.Info" OnClick="()=>OnItemEditClick(context)" />
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Small" Class="" Color="Color.Error" OnClick="()=>OnOrderItemDelete(context)" />
+
+                                }
+                                else
+                                {
+                                //<MudIconButton Icon="@Icons.Filled.ArrowForward" Variant="Variant.Outlined" Size="Size.Small" Class="mr-2" Color="Color.Info" OnClick="()=>AddToReplacement(context)" />
+                                }
+                        </div>
+
+
+                    </MudTd>
+
+
+                </RowTemplate>
+
+                <FooterContent>
+
+                    <MudTFootRow Class="bold-text bg-tr-g1">
+                        <MudTd colspan="3">Total</MudTd>
+
+                        <MudTd Style="text-align:right">@transaction.GetTransactionRateTotal().ToString("N2")</MudTd>
+                        <MudTd Style="text-align:right">@transaction.GetOrderDiscountTotal().ToString("N2")</MudTd>
+                        <MudTd Style="text-align:right">@transaction.GetOrderTotalWithDiscounts().ToString("N2")</MudTd>
+                        <MudTd></MudTd>
+                    </MudTFootRow>
+                </FooterContent>
+            </MudTable>
+
+                   </MudItem>
+}
+else
+{
+    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">Please wait while we fetch form definitons...</MudAlert>
+}

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>BL10.CleanArchitecture.Infrastructure.Shared</RootNamespace>
+    <AssemblyName>BL10.CleanArchitecture.Infrastructure.Shared</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.0.0-preview1" />
+    <PackageReference Include="MimeKit" Version="3.0.0-preview1" />
+  </ItemGroup>
+</Project>

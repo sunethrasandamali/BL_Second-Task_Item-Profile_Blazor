@@ -1,0 +1,34 @@
+﻿
+.in-button {
+    background: #5ca0db6e;
+    color: var(--mud-palette-primary) !important;
+    border: 1px solid var(--mud-palette-primary) !important;
+}
+
+.out-button {
+    color: #141516;
+    border: 1px solid #ffc107;
+    background: #ffbf0026
+}
+
+/*pending leave request*/
+.filterbtn {
+    background: #5ca0db6e;
+    color: var(--mud-palette-primary) !important;
+    border: 1px solid var(--mud-palette-primary) !important;
+}
+.p-lev-vi-sum {
+    color: #141516;
+    border: 1px solid #ffc107;
+    background: #ffbf0026
+}
+
+
+    .p-lev-vi-sum span {
+        overflow: hidden;
+        width: 70px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline-block;
+    }
+    

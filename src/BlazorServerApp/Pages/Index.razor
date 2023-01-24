@@ -1,0 +1,168 @@
+﻿@page "/"
+@page "/home"
+@using BlueLotus360.Com.UI.Definitions.MB.Shared
+
+<div class="coming-soon-page d-none">
+
+</div>
+
+    <MudGrid Class="mt-lg-2 ">
+
+      
+
+       <MudItem xs="12" md="9" Class="px-2">
+
+@*            <MudItem xs="12" Class="@(showReminderAlert?"px-2 mb-2 top-reminder":"d-none")">
+                <MudAlert Severity="Severity.Normal" NoIcon="true" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))">
+                    <MudChip  Style="@($"background-color:#B22424;")"></MudChip>Reminders
+                    <MudText>BL Scrum Meeting at 8.30am</MudText>
+                </MudAlert>
+            </MudItem>*@
+
+            <MudItem xs="12">
+             <MudCarousel Class="mud-width-full bl-carousel" ShowArrows="@true" ShowBullets="@true" AutoCycle="@true" TData="object">
+                  <BulletTemplate Context="selected">
+                        <div Class="mud-button-root mud-icon-button mud-icon-button-color-inherit mud-ripple mud-ripple-icon">
+                            <span class="mud-icon-button-label">
+                                <MudIcon Icon="@(selected ? Icons.TwoTone.RadioButtonChecked: Icons.TwoTone.RadioButtonUnchecked)" Color="@Color.Inherit" />
+                            </span>
+                        </div>
+                  </BulletTemplate>
+                  <ChildContent>
+                     <MudCarouselItem Transition="transition" Class="carousel-bg">
+                         <div class="d-flex justify-content-center align-items-center" style="height:100%;">
+                            <img src="./img/slider_img1.svg" class="carousel-img" style="height:100%;width:100%"/>
+                        </div>
+                    </MudCarouselItem>
+                    <MudCarouselItem Transition="transition" Color="Color.Primary">
+                        <div class="d-flex justify-content-center align-items-center" style="height:100%;">
+                            <img src="./img/bl-logo.svg" class="carousel-img">
+                        </div>
+                    </MudCarouselItem>              
+                 </ChildContent>
+             </MudCarousel>
+            </MudItem>
+
+            <MudItem xs="12" Class="mx-3">
+              <MudGrid Class="pin-wrapper mt-5">
+                @if (ChildMenu != null)
+                {
+                    <PinSection ElementKey="@elementKey" PinnedMenus="@ChildMenu"/>
+                }
+     
+                  @*<MudItem xs="12" Class="dshbrd-section  d-none">
+                      <DashboardsSection/>
+                  </MudItem>*@
+                
+              </MudGrid>
+            </MudItem>
+       </MudItem>
+       <MudItem xs="12" md="3" Class="px-5">
+           <MudGrid>          
+                <MudItem xs="6" md="12" Class="mt-6 mt-md-2">
+                     <MudCard Elevation="0" Class="my-items-card">
+                        <MudCardHeader>
+                         
+                            <CardHeaderContent>
+                                <b>My Notes</b>
+                               
+                            </CardHeaderContent>
+                            <CardHeaderActions>
+                                <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
+                            </CardHeaderActions>
+                        </MudCardHeader>
+                        
+                        <MudCardContent>
+                            <MudSkeleton Width="30%" Height="42px;" />
+                            <MudSkeleton Width="80%" />
+                            <MudSkeleton Width="100%" />
+                        </MudCardContent>
+                        <MudCardActions>
+                            @*<a style="color: #063b71ff ;">View All</a>*@
+                            <MudSkeleton Width="64px" />
+                            <MudSkeleton Width="105px" />
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem >
+                
+                <MudItem xs="6" md="12" Class="mt-6 mt-md-2 ">
+
+                    <MudCard Elevation="0" Class="my-todo-card">
+                        <MudCardHeader>
+                         
+                            <CardHeaderContent>
+
+                                <b>My To-Dos</b>
+                               
+                            </CardHeaderContent>
+                            <CardHeaderActions>
+                                <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
+                            </CardHeaderActions>
+                        </MudCardHeader>
+                        
+                        <MudCardContent>
+                            <div class="todo-empty">
+                                <img src="/img/no-to-do.svg"/>
+                                @*<b>No To-Dos</b>
+                                <span>You currently have no To-Dos</span>*@
+                                
+                            </div>
+                            <MudSkeleton Width="30%" Height="42px;" />
+                            <MudSkeleton Width="80%" />
+                            <MudSkeleton Width="100%" />
+                        </MudCardContent>
+                    
+                    </MudCard>
+            
+                </MudItem >
+
+                @*<MudItem xs="12" Class="bl-home-calander">
+                    <MudDatePicker PickerVariant="PickerVariant.Static" Rounded="true" Elevation="1" Date="@(DateTime.Now)" />
+                </MudItem>*@
+
+           </MudGrid>
+       </MudItem>
+
+     </MudGrid>
+
+
+
+       @*<MudItem Class="welcome-panel align-items-center">
+                         <MudItem xs="12" md="2" Class="d-flex justify-content-center px-3">
+                               @if (string.IsNullOrEmpty(ImageDataUrl))
+                               {
+                                   <MudAvatar  Size="Size.Large" Class="bl-avatar">@FirstLetterOfName</MudAvatar>
+                               }
+                               else
+                               {
+                                   <MudAvatar Image="@ImageDataUrl" Style="height:100px; width:100px;"> </MudAvatar>
+                               }
+                                
+                         </MudItem>
+
+                         <MudItem xs="12" md="6" Class="d-flex flex-column justify-content-center px-3">
+                                <h3 class="text-white text-lg-left text-center">Welcome @FirstName </h3>
+                                <h6 class="text-white text-lg-left text-center">You have successfully logged in to the @CompanyName!</h6>
+                         </MudItem>
+
+                         <MudItem xs="12" md="4" Class="d-flex justify-content-end px-3 w-100 mb-3 mb-md-0 ">
+                                <div class="last-access pa-3 d-none">
+                                    <div class="d-flex align-items-end">
+                                        <MudIcon Icon="@Icons.TwoTone.Cast" Color="Color.Dark"></MudIcon><b>&nbsp Last Accessed Item</b>
+
+                                    </div>
+                                    <span style="color: #777474;">Accounts Dashboards on @DateTime.Now</span>
+                                    <br />
+                                    <a href="/">Go to Accounts Dashboard</a>
+                                    
+                                </div>
+                         </MudItem>
+        </MudItem>*@
+
+    
+    
+
+
+     
+
+

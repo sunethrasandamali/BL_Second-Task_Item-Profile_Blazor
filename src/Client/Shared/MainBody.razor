@@ -1,0 +1,54 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> _localizer
+
+<MudAppBar Elevation="0">
+    <MudToolBar DisableGutters="true">
+        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" />
+        <div class="top-icon">
+             <img src="/img/full-colour-logo.svg" style="width:80px;height:50px;"/>
+            @* <MudText Typo="Typo.h6" Class="company-name">Blue Lotus 360</MudText>*@
+               
+        </div>
+       
+    </MudToolBar>
+    @*<MudIcon Icon="@CustomIcons.BlazorHero" Size="Size.Large" ViewBox="0 0 500 500" Class="ml-4"/>*@
+
+
+    <MudSpacer />
+    
+  
+    <MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+        <ActivatorContent>
+            @if (string.IsNullOrEmpty(ImageDataUrl))
+            {
+                <MudAvatar Color="Color.Secondary">@FirstLetterOfName</MudAvatar>
+            }
+            else
+            {
+                <MudAvatar Image="@ImageDataUrl" Style="height:50px; width:50px;"> </MudAvatar>
+            }
+        </ActivatorContent>
+        <ChildContent>
+            <UserCard Class="mt-n2" />
+            <MudDivider Class="mb-2" />
+            <MudListItem Text="@_localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+            <MudListItem Text="@_localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
+        </ChildContent>
+    </MudMenu>
+
+@*    <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+        <MudDivider Vertical="true" FlexItem="true" />
+        <MudPaper Square="true" Class="d-flex flex-column">
+            <span>@FirstName</span>
+            <span>@CompanyName</span>
+        </MudPaper>
+    </MudHidden>*@
+
+</MudAppBar>
+<MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always">
+    <NavMenu />
+</MudDrawer>
+<MudMainContent Class="main-background-image">
+    <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    @ChildContent
+    </MudContainer>
+</MudMainContent>

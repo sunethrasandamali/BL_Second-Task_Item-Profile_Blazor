@@ -1,0 +1,17 @@
+﻿@foreach (var item in Menu.SubMenus)
+{
+	if (item.SubMenus!=null && item.SubMenus.Count > 0)
+	{
+		<MudNavGroup Title="@item.MenuCaption" Expanded="false"  Icon="@IconDictionary[item.Menuname]">
+			<SideMenu Menu='@item' IconDictionary="IconDictionary"/>
+		</MudNavGroup>
+	}
+
+	else
+	{
+		<MudNavLink Href="@item.GetPathURL()" Match="NavLinkMatch.Prefix">@item.MenuCaption</MudNavLink>
+	}
+
+
+
+}
